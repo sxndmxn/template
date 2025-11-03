@@ -5,9 +5,10 @@ type WeatherForecast = components["schemas"]["WeatherForecast"];
 type WeatherForecastList = WeatherForecast[];
 
 export async function getWeatherForecast(signal?: AbortSignal): Promise<WeatherForecastList> {
-    const { data, error } = await api.GET("/WeatherForecast", { signal });
-    if (error) {
-        throw error;
+    const { data, error, response } = await api.GET("/WeatherForecast", { signal });
+    if (error || !response.ok) {
+        throw Object.assign(new Error(`HTTP ${response?.status}`), { status: response?.status, cause: error });
     }
+    
     return data ?? [];
 }
