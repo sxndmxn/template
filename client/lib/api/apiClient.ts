@@ -1,15 +1,17 @@
-import createClient, { Middleware } from "openapi-fetch";
-import type { paths } from "@/lib/api/v1"
+import createClient, { type Middleware } from "openapi-fetch";
+import { type paths } from "@/lib/api/v1";
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5294";
-
 const api = createClient<paths>({ baseUrl: apiBaseUrl });
 
-const myMiddleware: Middleware = {
+const middleware: Middleware = {
   async onRequest({ request }) {
     return request;
   },
   async onResponse({ response }) {
+    if (!response.ok) {
+      throw Error(`HTTP ${response.status}`);
+    }
     return response;
   },
   async onError({ error }) {
@@ -17,8 +19,8 @@ const myMiddleware: Middleware = {
   },
 };
 
-api.use(myMiddleware);
+api.use(middleware);
+const onGlobalSuccess = <T>(r: { data: T }) => r.data;
+const onGlobalError = (err: unknown) => Promise.reject(err);
 
-export {
-  api,
-};
+export { api, onGlobalSuccess, onGlobalError };
