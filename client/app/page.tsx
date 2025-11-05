@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { getWeatherForecast } from "@/services/weatherForecastService";
+import { getWeatherForecast, getWeatherForecastById } from "@/services/weatherForecastService";
 
 const weather = await getWeatherForecast();
+const oneWeather = await getWeatherForecastById(5);
 
 export default function Home() {
 
@@ -16,6 +17,10 @@ export default function Home() {
           height={20}
           priority
         />
+        <h1>
+          ONE WEATHER
+          DATE: {oneWeather?.date} TEMP C: {oneWeather?.temperatureC} ID" {oneWeather?.id}
+        </h1>
         <h1 className="text-xl font-bold">Weather</h1>
         <ul className="mt-4 space-y-2">
           {weather.map((w, i) => (

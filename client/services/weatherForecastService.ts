@@ -8,3 +8,11 @@ export async function getWeatherForecast(signal?: AbortSignal): Promise<WeatherF
     const { data } = await api.GET("/WeatherForecast", { signal });
     return data ?? [];
 }
+
+export async function getWeatherForecastById(id: number, signal?: AbortSignal): Promise<WeatherForecast | null> {
+    const { data } = await api.GET("/WeatherForecast/{id}", {
+        params: { path: { id } },
+        signal,
+    });
+    return data ?? null;
+}
