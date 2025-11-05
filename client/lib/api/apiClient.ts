@@ -9,9 +9,6 @@ const middleware: Middleware = {
     return request;
   },
   async onResponse({ response }) {
-    if (!response.ok) {
-      throw Error(`HTTP ${response.status}`);
-    }
     return response;
   },
   async onError({ error }) {
@@ -23,4 +20,7 @@ api.use(middleware);
 const onGlobalSuccess = <T>(r: { data: T }) => r.data;
 const onGlobalError = (err: unknown) => Promise.reject(err);
 
-export { api, onGlobalSuccess, onGlobalError };
+export { api, 
+  onGlobalSuccess, 
+  onGlobalError,
+};
