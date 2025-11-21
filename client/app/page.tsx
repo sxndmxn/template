@@ -1,10 +1,28 @@
 import Image from "next/image";
 import { getWeatherForecast, getWeatherForecastById } from "@/services/weatherForecastService";
 
-const weather = await getWeatherForecast();
-const oneWeather = await getWeatherForecastById(5);
+/**
+ * Home Page - Demonstrates Server Component data fetching
+ * 
+ * This page fetches data from the API during server-side rendering.
+ * The data is fetched at build time (for static generation) or request time (for dynamic rendering).
+ * 
+ * Note: If the API is not available during build, the page will show fallback content.
+ */
 
-export default function Home() {
+async function getWeatherData() {
+  try {
+    const weather = await getWeatherForecast();
+    const oneWeather = await getWeatherForecastById(5);
+    return { weather, oneWeather, error: null };
+  } catch (error) {
+    console.error("Failed to fetch weather data:", error);
+    return { weather: [], oneWeather: null, error: "Failed to connect to API" };
+  }
+}
+
+export default async function Home() {
+  const { weather, oneWeather, error } = await getWeatherData();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -17,20 +35,41 @@ export default function Home() {
           height={20}
           priority
         />
-        <h1>
-          ONE WEATHER
-          DATE: {oneWeather?.date} TEMP C: {oneWeather?.temperatureC} ID: {oneWeather?.id}
-        </h1>
-        <h1 className="text-xl font-bold">Weather</h1>
-        <ul className="mt-4 space-y-2">
-          {weather.map((w, i) => (
-            <li key={`weather-${i}`} className="rounded border p-3">
-              <div>{w.date}</div>
-              <div>{w.summary}</div>
-              <div>{w.temperatureC}°C / {w.temperatureF}°F</div>
-            </li>
-          ))}
-        </ul>
+        
+        {error ? (
+          <div className="rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-950">
+            <h2 className="text-lg font-semibold text-red-900 dark:text-red-100">API Connection Error</h2>
+            <p className="mt-2 text-sm text-red-700 dark:text-red-300">
+              Unable to connect to the API. Make sure the server is running at {process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5294"}
+            </p>
+          </div>
+        ) : (
+          <>
+            {oneWeather && (
+              <div className="mb-8 rounded-lg border p-4">
+                <h2 className="text-lg font-semibold">Sample Forecast (ID: {oneWeather.id})</h2>
+                <p className="mt-2">Date: {oneWeather.date}</p>
+                <p>Temperature: {oneWeather.temperatureC}°C / {oneWeather.temperatureF}°F</p>
+                <p>Summary: {oneWeather.summary}</p>
+              </div>
+            )}
+            
+            <h1 className="text-xl font-bold">All Weather Forecasts</h1>
+            {weather.length === 0 ? (
+              <p className="mt-4 text-muted-foreground">No forecasts available</p>
+            ) : (
+              <ul className="mt-4 space-y-2">
+                {weather.map((w, i) => (
+                  <li key={`weather-${i}`} className="rounded border p-3">
+                    <div className="font-medium">{w.date}</div>
+                    <div className="text-sm text-muted-foreground">{w.summary}</div>
+                    <div className="text-sm">{w.temperatureC}°C / {w.temperatureF}°F</div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        )}
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             To get started, edit the page.tsx file.
