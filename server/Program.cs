@@ -5,31 +5,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddProblemDetails(options =>
 {
-    options.CustomizeProblemDetails = ctx =>
+    options.CustomizeProblemDetails = context =>
     {
-        ctx.ProblemDetails.Extensions["traceId"] = ctx.HttpContext.TraceIdentifier;
+        context.ProblemDetails.Extensions["traceId"] = context.HttpContext.TraceIdentifier;
     };
 });
 builder.Services.AddOpenApi();
 
-var app = builder.Build();
-app.UseExceptionHandler("/error");
+var webApp = builder.Build();
+webApp.UseExceptionHandler("/error");
 
-app.Map("/error", (HttpContext http, IHostEnvironment env) =>
+webApp.Map("/error", (HttpContext httpContext, IHostEnvironment env) =>
 {
-    var ex = http.Features.Get<IExceptionHandlerFeature>()?.Error;
+    var exception = httpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
     return Results.Problem(
         title: "An unexpected error occurred.",
-        detail: env.IsDevelopment() ? ex?.ToString() : null,
+        detail: env.IsDevelopment() ? exception?.ToString() : null,
         statusCode: StatusCodes.Status500InternalServerError);
 });
 
-if (app.Environment.IsDevelopment())
+if (webApp.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    webApp.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
-app.Run();
+webApp.UseHttpsRedirection();
+webApp.UseAuthorization();
+webApp.MapControllers();
+webApp.Run();

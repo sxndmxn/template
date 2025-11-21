@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { getWeatherForecast, getWeatherForecastById } from "@/services/weatherForecastService";
 
-const weather = await getWeatherForecast();
-const oneWeather = await getWeatherForecastById(5);
+const weatherForecasts = await getWeatherForecast();
+const selectedWeatherForecast = await getWeatherForecastById(5);
 
 export default function Home() {
 
@@ -19,15 +19,15 @@ export default function Home() {
         />
         <h1>
           ONE WEATHER
-          DATE: {oneWeather?.date} TEMP C: {oneWeather?.temperatureC} ID" {oneWeather?.id}
+          DATE: {selectedWeatherForecast?.date} TEMP C: {selectedWeatherForecast?.temperatureC} ID&quot; {selectedWeatherForecast?.id}
         </h1>
         <h1 className="text-xl font-bold">Weather</h1>
         <ul className="mt-4 space-y-2">
-          {weather.map((w, i) => (
-            <li key={`weather-${i}`} className="rounded border p-3">
-              <div>{w.date}</div>
-              <div>{w.summary}</div>
-              <div>{w.temperatureC}°C / {w.temperatureF}°F</div>
+          {weatherForecasts.map((forecast) => (
+            <li key={`weather-${forecast.id}`} className="rounded border p-3">
+              <div>{forecast.date}</div>
+              <div>{forecast.summary}</div>
+              <div>{forecast.temperatureC}°C / {forecast.temperatureF}°F</div>
             </li>
           ))}
         </ul>
