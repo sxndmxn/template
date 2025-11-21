@@ -25,9 +25,9 @@ public class WeatherForecast
     /// <summary>
     /// Gets the temperature in Fahrenheit.
     /// This is a computed property that automatically converts from Celsius.
-    /// Formula: F = C * 1.8 + 32
+    /// Formula: F = C × 1.8 + 32
     /// </summary>
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    public int TemperatureF => 32 + (int)(TemperatureC * 1.8);
 
     /// <summary>
     /// Gets or sets a brief description of the weather conditions (e.g., "Sunny", "Rainy").
