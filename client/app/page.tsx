@@ -19,7 +19,7 @@ export default function Home() {
         />
         <h1>
           ONE WEATHER
-          DATE: {oneWeather?.date} TEMP C: {oneWeather?.temperatureC} ID" {oneWeather?.id}
+          DATE: {oneWeather?.date} TEMP C: {oneWeather?.temperatureC} ID: {oneWeather?.id}
         </h1>
         <h1 className="text-xl font-bold">Weather</h1>
         <ul className="mt-4 space-y-2">

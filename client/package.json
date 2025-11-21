@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:ts": "tsc --noEmit"
+    "test:ts": "tsc --noEmit",
+    "generate:api": "openapi-typescript http://localhost:5294/openapi/v1.json -o lib/api/v1.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
