@@ -1,15 +1,6 @@
 import Image from "next/image";
 import { getWeatherForecast, getWeatherForecastById } from "@/services/weatherForecastService";
 
-/**
- * Home Page - Demonstrates Server Component data fetching
- * 
- * This page fetches data from the API during server-side rendering.
- * The data is fetched at build time (for static generation) or request time (for dynamic rendering).
- * 
- * Note: If the API is not available during build, the page will show fallback content.
- */
-
 async function getWeatherData() {
   try {
     const weather = await getWeatherForecast();

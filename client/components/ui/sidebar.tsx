@@ -606,13 +606,8 @@ function SidebarMenuSkeleton({
 }: React.ComponentProps<"div"> & {
   showIcon?: boolean
 }) {
-  // Random width between 50 to 90%.
-  // Using a deterministic pseudorandom generator to avoid ESLint purity warning
-  // This uses a Linear Congruential Generator (LCG) algorithm for consistent results
   const width = React.useMemo(() => {
-    // Create a seed from component props for consistent but varied widths
     const seed = (className?.length ?? 0) + (showIcon ? 1 : 0);
-    // LCG constants: multiplier (9301), increment (49297), modulus (233280)
     const pseudoRandom = ((seed * 9301 + 49297) % 233280) / 233280;
     return `${Math.floor(pseudoRandom * 40) + 50}%`
   }, [className, showIcon])
