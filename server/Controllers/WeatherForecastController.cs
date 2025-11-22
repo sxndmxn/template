@@ -84,7 +84,7 @@ namespace Server.Controllers
             }
 
             weatherForecast.Id = id;
-            _weatherForecasts[id] = weatherForecast; // atomic set
+            _weatherForecasts[id] = weatherForecast;
             return Ok(weatherForecast);
         }
 
