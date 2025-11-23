@@ -43,8 +43,8 @@ function WeatherContent({ weather, oneWeather }: { weather: WeatherForecast[], o
         <p className="mt-4 text-muted-foreground">No forecasts available</p>
       ) : (
         <ul className="mt-4 space-y-2">
-          {weather.map((w, i) => (
-            <li key={`weather-${i}`} className="rounded border p-3">
+          {weather.map((w) => (
+            <li key={w.id} className="rounded border p-3">
               <div className="font-medium">{w.date}</div>
               <div className="text-sm text-muted-foreground">{w.summary}</div>
               <div className="text-sm">{w.temperatureC}°C / {w.temperatureF}°F</div>
