@@ -1,20 +1,15 @@
 import Image from "next/image";
 import { getWeatherForecast, getWeatherForecastById } from "@/services/weatherForecastService";
+import type { components } from "@/lib/api/v1";
+
+type WeatherForecast = components["schemas"]["WeatherForecast"];
 
 const weatherForecasts = await getWeatherForecast();
 const selectedWeatherForecast = await getWeatherForecastById(5);
 
-interface WeatherForecast {
-  id: number;
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string | null;
-}
-
 function WeatherForecastItem({ forecast }: { forecast: WeatherForecast }) {
   return (
-    <li key={`weather-${forecast.id}`} className="rounded border p-3">
+    <li className="rounded border p-3">
       <div>{forecast.date}</div>
       <div>{forecast.summary}</div>
       <div>{forecast.temperatureC}°C / {forecast.temperatureF}°F</div>
