@@ -4,6 +4,24 @@ import { getWeatherForecast, getWeatherForecastById } from "@/services/weatherFo
 const weatherForecasts = await getWeatherForecast();
 const selectedWeatherForecast = await getWeatherForecastById(5);
 
+interface WeatherForecast {
+  id: number;
+  date: string;
+  temperatureC: number;
+  temperatureF: number;
+  summary: string | null;
+}
+
+function WeatherForecastItem({ forecast }: { forecast: WeatherForecast }) {
+  return (
+    <li key={`weather-${forecast.id}`} className="rounded border p-3">
+      <div>{forecast.date}</div>
+      <div>{forecast.summary}</div>
+      <div>{forecast.temperatureC}°C / {forecast.temperatureF}°F</div>
+    </li>
+  );
+}
+
 export default function Home() {
 
   return (
@@ -24,11 +42,7 @@ export default function Home() {
         <h1 className="text-xl font-bold">Weather</h1>
         <ul className="mt-4 space-y-2">
           {weatherForecasts.map((forecast) => (
-            <li key={`weather-${forecast.id}`} className="rounded border p-3">
-              <div>{forecast.date}</div>
-              <div>{forecast.summary}</div>
-              <div>{forecast.temperatureC}°C / {forecast.temperatureF}°F</div>
-            </li>
+            <WeatherForecastItem key={forecast.id} forecast={forecast} />
           ))}
         </ul>
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
