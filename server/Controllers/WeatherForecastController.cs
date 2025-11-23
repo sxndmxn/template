@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
 
-namespace Server.Controllers
+namespace Server.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public sealed class WeatherForecastController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public sealed class WeatherForecastController : ControllerBase
-    {
         private static readonly ConcurrentDictionary<int, WeatherForecast> _store = new()
         {
             [1] = new WeatherForecast { Id = 1, Date = DateOnly.FromDateTime(DateTime.UtcNow.Date), TemperatureC = 18, Summary = "Chilly" },
@@ -99,7 +99,5 @@ namespace Server.Controllers
                    title: "Not Found",
                    detail: $"WeatherForecast {id} not found.",
                    statusCode: StatusCodes.Status404NotFound);
-        }
-
     }
 }
