@@ -1,21 +1,8 @@
 import Image from "next/image";
 import { getWeatherForecast, getWeatherForecastById } from "@/services/weatherForecastService";
-import type { components } from "@/lib/api/v1";
 
-type WeatherForecast = components["schemas"]["WeatherForecast"];
-
-const weatherForecasts = await getWeatherForecast();
-const selectedWeatherForecast = await getWeatherForecastById(5);
-
-function WeatherForecastItem({ forecast }: { forecast: WeatherForecast }) {
-  return (
-    <li className="rounded border p-3">
-      <div>{forecast.date}</div>
-      <div>{forecast.summary}</div>
-      <div>{forecast.temperatureC}°C / {forecast.temperatureF}°F</div>
-    </li>
-  );
-}
+const weather = await getWeatherForecast();
+const oneWeather = await getWeatherForecastById(5);
 
 export default function Home() {
 
@@ -32,12 +19,16 @@ export default function Home() {
         />
         <h1>
           ONE WEATHER
-          DATE: {selectedWeatherForecast?.date} TEMP C: {selectedWeatherForecast?.temperatureC} ID&quot; {selectedWeatherForecast?.id}
+          DATE: {oneWeather?.date} TEMP C: {oneWeather?.temperatureC} ID" {oneWeather?.id}
         </h1>
         <h1 className="text-xl font-bold">Weather</h1>
         <ul className="mt-4 space-y-2">
-          {weatherForecasts.map((forecast) => (
-            <WeatherForecastItem key={forecast.id} forecast={forecast} />
+          {weather.map((w, i) => (
+            <li key={`weather-${i}`} className="rounded border p-3">
+              <div>{w.date}</div>
+              <div>{w.summary}</div>
+              <div>{w.temperatureC}°C / {w.temperatureF}°F</div>
+            </li>
           ))}
         </ul>
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
