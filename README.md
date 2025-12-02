@@ -1,6 +1,6 @@
 # Full-Stack Template: .NET API + Next.js Client
 
-A production-ready template for building modern web applications with a .NET Core API backend and Next.js 16 frontend. This repository demonstrates best practices and common patterns, making it both a starting point for new projects and a learning resource for understanding full-stack development.
+A minimal, barebones template for building modern web applications with a .NET Core API backend and Next.js 16 frontend. This repository demonstrates clean architecture patterns and best practices without unnecessary complexity.
 
 ## 🏗️ Architecture Overview
 
@@ -15,15 +15,15 @@ This template follows a clean separation between client and server:
 - **`/client`** - Next.js 16 Application (App Router)
   - Server Components for optimal performance
   - Type-safe API client generated from OpenAPI spec
-  - Comprehensive UI component library with Radix UI + Tailwind CSS
-  - Dark mode support with next-themes
+  - Minimal Tailwind CSS styling
+  - No UI component library dependencies
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
 - [.NET 10.0 SDK](https://dotnet.microsoft.com/download)
-- [Bun](https://bun.sh/) (or Node.js 20+)
+- [Node.js 20+](https://nodejs.org/)
 - Git
 
 ### Running the API
@@ -48,10 +48,10 @@ The API will start at `https://localhost:7294` (or `http://localhost:5294`). Ope
 cd client
 
 # Install dependencies
-bun install
+npm install
 
 # Start the development server
-bun run dev
+npm run dev
 ```
 
 The client will start at `http://localhost:3000`.
@@ -67,8 +67,8 @@ dotnet publish -c Release -o ./publish
 **Client:**
 ```bash
 cd client
-bun run build
-bun run start
+npm run build
+npm run start
 ```
 
 ## 📚 What You'll Learn
@@ -114,12 +114,11 @@ This template demonstrates:
    - Server Components for data fetching
    - Client Components for interactivity
    - Composition patterns
-   - Form handling with react-hook-form
+   - Minimal styling with Tailwind CSS
 
 4. **UI/UX**
-   - Pre-built accessible components
-   - Dark mode support
-   - Responsive design
+   - Simple, clean design
+   - Responsive layout
    - Loading and error states
 
 ## 🔧 Configuration
@@ -186,19 +185,19 @@ dotnet publish -c Release
 
 ```bash
 # Development server
-bun run dev
+npm run dev
 
 # Type checking
-bun run test:ts
+npm run test:ts
 
 # Linting
-bun run lint
+npm run lint
 
 # Production build
-bun run build
+npm run build
 
 # Start production server
-bun run start
+npm run start
 ```
 
 ## 🔄 Generating API Types
@@ -240,9 +239,9 @@ To adapt this template for your needs:
    - Replace in-memory storage with database
 
 5. **Enhance UI**
+   - Add UI component libraries like Radix UI or shadcn/ui
    - Customize Tailwind configuration
    - Add your brand colors and fonts
-   - Build on the existing component library
 
 ## 📦 Technology Stack
 
@@ -256,11 +255,10 @@ To adapt this template for your needs:
 - React 19
 - TypeScript 5
 - Tailwind CSS 4
-- Radix UI components
 - openapi-fetch for type-safe API calls
 
 ### Development Tools
-- Bun for JavaScript tooling
+- npm for package management
 - ESLint for code linting
 - TypeScript compiler for type checking
 
@@ -277,7 +275,6 @@ This template is provided as-is for you to use and modify as needed for your pro
 - [ASP.NET Core Documentation](https://learn.microsoft.com/en-us/aspnet/core/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [OpenAPI Specification](https://swagger.io/specification/)
-- [Radix UI Components](https://www.radix-ui.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 
 ---
