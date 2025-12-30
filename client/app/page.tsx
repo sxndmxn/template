@@ -84,7 +84,7 @@ function AircraftContent({ aircraft, oneAircraft }: { aircraft: AircraftSensor[]
         </div>
       )}
       
-      <h1 className="text-xl font-bold">War Thunder Aircraft Sensor Data</h1>
+      <h1 className="text-xl font-bold">Aircraft Sensor Data</h1>
       {aircraft.length === 0 ? (
         <p className="mt-4 text-muted-foreground">No aircraft data available</p>
       ) : (
@@ -146,10 +146,10 @@ export default async function Home() {
         {error ? <ApiError /> : <AircraftContent aircraft={aircraft} oneAircraft={oneAircraft} />}
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            War Thunder Radar & Sensor Data System
+            Aircraft Radar & Sensor Data System
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            This application demonstrates gameplay-extracted data from War Thunder. All data represents observable, in-game mechanics only - no real-world specifications.
+            This application demonstrates gameplay-extracted aircraft sensor data. All data represents observable, in-game mechanics only - no real-world specifications.
           </p>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
