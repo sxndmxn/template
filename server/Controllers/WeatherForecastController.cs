@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Concurrent;
-
 namespace Server.Controllers;
 
 [ApiController]
@@ -103,5 +100,6 @@ public sealed class WeatherForecastController : ControllerBase
                    title: "Not Found",
                    detail: $"WeatherForecast {id} not found.",
                    statusCode: StatusCodes.Status404NotFound);
+        }
     }
 }
