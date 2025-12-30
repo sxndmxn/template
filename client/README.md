@@ -44,6 +44,12 @@ bun run build
 # Start production server (after build)
 bun run start
 
+# Run tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
 # Type checking
 bun run test:ts
 
@@ -152,11 +158,45 @@ export async function getMyResources(): Promise<MyResource[]> {
 
 ## 🧪 Testing
 
-The template includes TypeScript type checking. To add tests:
+The project uses Vitest and React Testing Library for unit testing.
 
-1. Install a testing framework (e.g., Vitest, Jest)
-2. Create test files alongside components: `MyComponent.test.tsx`
-3. Add test scripts to `package.json`
+```bash
+# Run tests once
+npm test
+
+# Run tests in watch mode (re-runs on file changes)
+npm run test:watch
+
+# Run tests with UI (interactive test viewer)
+npm run test:ui
+```
+
+### Test Coverage
+
+The test suite includes comprehensive tests for UI components:
+- Simple components (Button, Badge, Input, Label, Spinner, Skeleton)
+- Composite components (Card, Alert)
+- Interactive components (Checkbox, Switch, Progress, Separator)
+
+See [components/ui/__tests__/README.md](components/ui/__tests__/README.md) for detailed testing documentation.
+
+### Writing Tests
+
+Create test files alongside components:
+
+```typescript
+// components/ui/__tests__/my-component.test.tsx
+import { describe, it, expect } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import { MyComponent } from '../my-component'
+
+describe('MyComponent', () => {
+  it('renders correctly', () => {
+    render(<MyComponent>Test</MyComponent>)
+    expect(screen.getByText('Test')).toBeInTheDocument()
+  })
+})
+```
 
 ## 📦 Building for Production
 
