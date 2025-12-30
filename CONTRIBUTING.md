@@ -276,9 +276,11 @@ Add CORS configuration to the API (see "Setting Up CORS" above)
 
 1. **Create Test Project**
    ```bash
+   cd server
    dotnet new xunit -n Server.Tests
    cd Server.Tests
-   dotnet add reference ../Server/Server.csproj
+   dotnet add reference ../Server.Api/Server.csproj
+   dotnet sln ../Server.sln add Server.Tests.csproj
    ```
 
 2. **Add Integration Tests**

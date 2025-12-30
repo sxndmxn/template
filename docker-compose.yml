@@ -1,7 +1,7 @@
 services:
   server:
     build:
-      context: ./server
+      context: ./server/Server.Api
       dockerfile: Dockerfile
     container_name: template-server
     ports:

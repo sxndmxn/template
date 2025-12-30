@@ -165,8 +165,8 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:5294
 
 ### Server Tests
 
-- **`Server.Tests/WeatherForecastTests.cs`** - Unit tests for WeatherForecast model
-- **`Server.Tests/WeatherForecastControllerTests.cs`** - Comprehensive unit tests for API controller
+- **`server/Server.Tests/WeatherForecastTests.cs`** - Unit tests for WeatherForecast model
+- **`server/Server.Tests/WeatherForecastControllerTests.cs`** - Comprehensive unit tests for API controller
 
 ### Client
 
@@ -230,8 +230,8 @@ Consider adding this as a script in `package.json` for convenience.
 To adapt this template for your needs:
 
 1. **Replace the Weather Example**
-   - Create new models in `server/`
-   - Add new controllers in `server/Controllers/`
+   - Create new models in `server/Server.Api/`
+   - Add new controllers in `server/Server.Api/Controllers/`
    - Update services in `client/services/`
    - Regenerate API types
 
