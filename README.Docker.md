@@ -58,7 +58,7 @@ The `docker-compose.yml` file defines two services:
 
 1. **server**: ASP.NET Core API
    - Exposed on port 5294 (host) → 8080 (container)
-   - Built from `./server/Dockerfile`
+   - Built from `./server/Server.Api/Dockerfile`
    - Includes health check for the WeatherForecast endpoint
 
 2. **client**: Next.js application
