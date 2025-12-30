@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
 
-namespace Server.Controllers
+namespace Server.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public sealed class WeatherForecastController : ControllerBase
 {
     [ApiController]
     [Route("[controller]")]
@@ -99,7 +103,5 @@ namespace Server.Controllers
                    title: "Not Found",
                    detail: $"WeatherForecast {id} not found.",
                    statusCode: StatusCodes.Status404NotFound);
-        }
-
     }
 }
