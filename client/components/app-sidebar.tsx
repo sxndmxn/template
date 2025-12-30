@@ -2,16 +2,17 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
+  Plane,
+  Radar,
+  Target,
+  BarChart3,
   Settings2,
-  SquareTerminal,
+  FileText,
+  Crosshair,
+  Radio,
+  Activity,
+  Shield,
+  Zap,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -28,129 +29,183 @@ import {
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Pilot",
+    email: "pilot@warthunder.com",
+    avatar: "/avatars/pilot.jpg",
   },
   teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      name: "War Thunder",
+      logo: Plane,
+      plan: "Combat Ready",
     },
     {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
+      name: "Air Superiority",
+      logo: Target,
+      plan: "Active",
     },
     {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
+      name: "Ground Forces",
+      logo: Shield,
+      plan: "Standby",
     },
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Aircraft Database",
+      url: "/",
+      icon: Plane,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "All Aircraft",
+          url: "/",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "By Nation",
+          url: "/dashboard",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "By Battle Rating",
+          url: "/dashboard",
+        },
+        {
+          title: "Search Aircraft",
+          url: "/",
         },
       ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
+      title: "Radar Systems",
+      url: "/",
+      icon: Radar,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Radar Types",
+          url: "/",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Radar Modes",
+          url: "/",
         },
         {
-          title: "Quantum",
-          url: "#",
+          title: "Look-Down Capable",
+          url: "/",
+        },
+        {
+          title: "Guidance Systems",
+          url: "/",
+        },
+      ],
+    },
+    {
+      title: "Sensor Analysis",
+      url: "/",
+      icon: Activity,
+      items: [
+        {
+          title: "RWR Systems",
+          url: "/",
+        },
+        {
+          title: "Countermeasures",
+          url: "/",
+        },
+        {
+          title: "Detection Range",
+          url: "/",
+        },
+        {
+          title: "Lock-On Mechanics",
+          url: "/",
+        },
+      ],
+    },
+    {
+      title: "Combat Data",
+      url: "/data-export",
+      icon: BarChart3,
+      items: [
+        {
+          title: "Export Data",
+          url: "/data-export",
+        },
+        {
+          title: "Statistics",
+          url: "/dashboard",
+        },
+        {
+          title: "Battle Reports",
+          url: "/dashboard",
+        },
+        {
+          title: "Comparisons",
+          url: "/virtualized-table",
         },
       ],
     },
     {
       title: "Documentation",
-      url: "#",
-      icon: BookOpen,
+      url: "/",
+      icon: FileText,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "Getting Started",
+          url: "/",
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: "Radar Guide",
+          url: "/",
         },
         {
-          title: "Tutorials",
-          url: "#",
+          title: "Sensor Mechanics",
+          url: "/",
         },
         {
-          title: "Changelog",
-          url: "#",
+          title: "API Reference",
+          url: "/",
         },
       ],
     },
     {
       title: "Settings",
-      url: "#",
+      url: "/",
       icon: Settings2,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "Display Options",
+          url: "/",
         },
         {
-          title: "Team",
-          url: "#",
+          title: "Data Preferences",
+          url: "/",
         },
         {
-          title: "Billing",
-          url: "#",
+          title: "API Configuration",
+          url: "/",
         },
         {
-          title: "Limits",
-          url: "#",
+          title: "About",
+          url: "/",
         },
       ],
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
+      name: "Target Acquisition",
+      url: "/",
+      icon: Crosshair,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
+      name: "Electronic Warfare",
+      url: "/",
+      icon: Radio,
     },
     {
-      name: "Travel",
-      url: "#",
-      icon: Map,
+      name: "Tactical Systems",
+      url: "/",
+      icon: Zap,
     },
   ],
 }
