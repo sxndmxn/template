@@ -1,4 +1,3 @@
-// app/virtualized-table/page.tsx
 "use client";
 
 import * as React from "react";
