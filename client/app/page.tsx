@@ -127,6 +127,13 @@ function AircraftContent({ aircraft, oneAircraft }: { aircraft: AircraftSensor[]
   );
 }
 
+function renderContent(error: string | null, aircraft: AircraftSensor[], oneAircraft: AircraftSensor | null) {
+  if (error) {
+    return <ApiError />;
+  }
+  return <AircraftContent aircraft={aircraft} oneAircraft={oneAircraft} />;
+}
+
 export default async function Home() {
   const { aircraft, oneAircraft, error } = await getAircraftData();
 
@@ -139,7 +146,7 @@ export default async function Home() {
         </p>
       </div>
       
-      {error ? <ApiError /> : <AircraftContent aircraft={aircraft} oneAircraft={oneAircraft} />}
+      {renderContent(error, aircraft, oneAircraft)}
     </main>
   );
 }
