@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AppSidebar } from "@/components/app-sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar";
 
 export const metadata: Metadata = {
-	title: "Full-Stack Template",
-	description: "A modern .NET API + Next.js client template",
+	title: "War Thunder - Aircraft Sensor Database",
+	description: "Comprehensive aircraft radar and sensor data system for War Thunder",
 };
 
 export default function RootLayout({
@@ -12,7 +17,12 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className="font-sans antialiased">
-				{children}
+				<SidebarProvider>
+					<AppSidebar />
+					<SidebarInset>
+						{children}
+					</SidebarInset>
+				</SidebarProvider>
 			</body>
 		</html>
 	);
