@@ -1,17 +1,17 @@
 import Image from "next/image";
-import { getWeatherForecast, getWeatherForecastById } from "@/services/weatherForecastService";
+import { getAircraftSensors, getAircraftSensorById } from "@/services/aircraftSensorService";
 import type { components } from "@/lib/api/v1";
 
-type WeatherForecast = components["schemas"]["WeatherForecast"];
+type AircraftSensor = components["schemas"]["AircraftSensor"];
 
-async function getWeatherData() {
+async function getAircraftData() {
   try {
-    const weather = await getWeatherForecast();
-    const oneWeather = await getWeatherForecastById(5);
-    return { weather, oneWeather, error: null };
+    const aircraft = await getAircraftSensors();
+    const oneAircraft = await getAircraftSensorById(1);
+    return { aircraft, oneAircraft, error: null };
   } catch (error) {
-    console.error("Failed to fetch weather data:", error);
-    return { weather: [], oneWeather: null, error: "Failed to connect to API" };
+    console.error("Failed to fetch aircraft data:", error);
+    return { aircraft: [], oneAircraft: null, error: "Failed to connect to API" };
   }
 }
 
@@ -26,28 +26,100 @@ function ApiError() {
   );
 }
 
-function WeatherContent({ weather, oneWeather }: { weather: WeatherForecast[], oneWeather: WeatherForecast | null }) {
+function AircraftContent({ aircraft, oneAircraft }: { aircraft: AircraftSensor[], oneAircraft: AircraftSensor | null }) {
   return (
     <>
-      {oneWeather && (
+      {oneAircraft && (
         <div className="mb-8 rounded-lg border p-4">
-          <h2 className="text-lg font-semibold">Sample Forecast (ID: {oneWeather.id})</h2>
-          <p className="mt-2">Date: {oneWeather.date}</p>
-          <p>Temperature: {oneWeather.temperatureC}°C / {oneWeather.temperatureF}°F</p>
-          <p>Summary: {oneWeather.summary}</p>
+          <h2 className="text-lg font-semibold">Sample Aircraft (ID: {oneAircraft.id})</h2>
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <div>
+              <p className="font-medium">{oneAircraft.aircraftName}</p>
+              <p className="text-sm text-muted-foreground">Nation: {oneAircraft.nation}</p>
+              <p className="text-sm text-muted-foreground">BR: {oneAircraft.battleRating}</p>
+            </div>
+            <div>
+              <p className="text-sm">Radar: {oneAircraft.radarPresent ? oneAircraft.radarType : "None"}</p>
+              <p className="text-sm">Guidance: {oneAircraft.guidanceType || "N/A"}</p>
+              <p className="text-sm">RWR: {oneAircraft.rwrPresent ? "Yes" : "No"}</p>
+            </div>
+          </div>
+          {oneAircraft.classification && (
+            <p className="mt-2 text-sm font-medium text-blue-600 dark:text-blue-400">
+              Classification: {oneAircraft.classification}
+            </p>
+          )}
+          {oneAircraft.radarModes && oneAircraft.radarModes.length > 0 && (
+            <div className="mt-2">
+              <p className="text-sm font-medium">Radar Modes:</p>
+              <div className="flex flex-wrap gap-1 mt-1">
+                {oneAircraft.radarModes.map((mode) => (
+                  <span key={mode} className="text-xs bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded">
+                    {mode}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          {oneAircraft.strengths && oneAircraft.strengths.length > 0 && (
+            <div className="mt-2">
+              <p className="text-sm font-medium text-green-600 dark:text-green-400">Strengths:</p>
+              <ul className="text-xs list-disc list-inside">
+                {oneAircraft.strengths.map((strength, idx) => (
+                  <li key={idx}>{strength}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {oneAircraft.limitations && oneAircraft.limitations.length > 0 && (
+            <div className="mt-2">
+              <p className="text-sm font-medium text-red-600 dark:text-red-400">Limitations:</p>
+              <ul className="text-xs list-disc list-inside">
+                {oneAircraft.limitations.map((limitation, idx) => (
+                  <li key={idx}>{limitation}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
       
-      <h1 className="text-xl font-bold">All Weather Forecasts</h1>
-      {weather.length === 0 ? (
-        <p className="mt-4 text-muted-foreground">No forecasts available</p>
+      <h1 className="text-xl font-bold">Aircraft Sensor Data</h1>
+      {aircraft.length === 0 ? (
+        <p className="mt-4 text-muted-foreground">No aircraft data available</p>
       ) : (
         <ul className="mt-4 space-y-2">
-          {weather.map((w) => (
-            <li key={w.id} className="rounded border p-3">
-              <div className="font-medium">{w.date}</div>
-              <div className="text-sm text-muted-foreground">{w.summary}</div>
-              <div className="text-sm">{w.temperatureC}°C / {w.temperatureF}°F</div>
+          {aircraft.map((a) => (
+            <li key={a.id} className="rounded border p-3">
+              <div className="flex justify-between items-start">
+                <div>
+                  <div className="font-medium">{a.aircraftName}</div>
+                  <div className="text-sm text-muted-foreground">{a.nation} • BR {a.battleRating}</div>
+                </div>
+                <div className="text-right">
+                  {a.radarPresent && (
+                    <span className="text-xs bg-purple-100 dark:bg-purple-900 px-2 py-1 rounded mr-1">
+                      {a.radarType}
+                    </span>
+                  )}
+                  {a.guidanceType && (
+                    <span className="text-xs bg-orange-100 dark:bg-orange-900 px-2 py-1 rounded">
+                      {a.guidanceType}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="mt-2 text-xs grid grid-cols-3 gap-2">
+                <div>
+                  <span className="font-medium">Look-down:</span> {a.lookDownCapable ? "✓" : "✗"}
+                </div>
+                <div>
+                  <span className="font-medium">Notch:</span> {a.notchSusceptible ? "Susceptible" : "Resistant"}
+                </div>
+                <div>
+                  <span className="font-medium">RWR:</span> {a.rwrPresent ? "✓" : "✗"}
+                </div>
+              </div>
             </li>
           ))}
         </ul>
@@ -57,7 +129,7 @@ function WeatherContent({ weather, oneWeather }: { weather: WeatherForecast[], o
 }
 
 export default async function Home() {
-  const { weather, oneWeather, error } = await getWeatherData();
+  const { aircraft, oneAircraft, error } = await getAircraftData();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -71,27 +143,13 @@ export default async function Home() {
           priority
         />
         
-        {error ? <ApiError /> : <WeatherContent weather={weather} oneWeather={oneWeather} />}
+        {error ? <ApiError /> : <AircraftContent aircraft={aircraft} oneAircraft={oneAircraft} />}
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+            Aircraft Radar & Sensor Data System
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+            This application demonstrates gameplay-extracted aircraft sensor data. All data represents observable, in-game mechanics only - no real-world specifications.
           </p>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">

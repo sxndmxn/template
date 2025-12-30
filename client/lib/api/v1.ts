@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/WeatherForecast": {
+    "/AircraftSensor": {
         parameters: {
             query?: never;
             header?: never;
@@ -26,9 +26,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["WeatherForecast"][];
-                        "application/json": components["schemas"]["WeatherForecast"][];
-                        "text/json": components["schemas"]["WeatherForecast"][];
+                        "text/plain": components["schemas"]["AircraftSensor"][];
+                        "application/json": components["schemas"]["AircraftSensor"][];
+                        "text/json": components["schemas"]["AircraftSensor"][];
                     };
                 };
             };
@@ -43,9 +43,9 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["WeatherForecast"];
-                    "text/json": components["schemas"]["WeatherForecast"];
-                    "application/*+json": components["schemas"]["WeatherForecast"];
+                    "application/json": components["schemas"]["AircraftSensor"];
+                    "text/json": components["schemas"]["AircraftSensor"];
+                    "application/*+json": components["schemas"]["AircraftSensor"];
                 };
             };
             responses: {
@@ -55,9 +55,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["WeatherForecast"];
-                        "application/json": components["schemas"]["WeatherForecast"];
-                        "text/json": components["schemas"]["WeatherForecast"];
+                        "text/plain": components["schemas"]["AircraftSensor"];
+                        "application/json": components["schemas"]["AircraftSensor"];
+                        "text/json": components["schemas"]["AircraftSensor"];
                     };
                 };
                 /** @description Bad Request */
@@ -90,7 +90,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/WeatherForecast/{id}": {
+    "/AircraftSensor/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -114,9 +114,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["WeatherForecast"];
-                        "application/json": components["schemas"]["WeatherForecast"];
-                        "text/json": components["schemas"]["WeatherForecast"];
+                        "text/plain": components["schemas"]["AircraftSensor"];
+                        "application/json": components["schemas"]["AircraftSensor"];
+                        "text/json": components["schemas"]["AircraftSensor"];
                     };
                 };
                 /** @description Not Found */
@@ -143,9 +143,9 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["WeatherForecast"];
-                    "text/json": components["schemas"]["WeatherForecast"];
-                    "application/*+json": components["schemas"]["WeatherForecast"];
+                    "application/json": components["schemas"]["AircraftSensor"];
+                    "text/json": components["schemas"]["AircraftSensor"];
+                    "application/*+json": components["schemas"]["AircraftSensor"];
                 };
             };
             responses: {
@@ -155,9 +155,9 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "text/plain": components["schemas"]["WeatherForecast"];
-                        "application/json": components["schemas"]["WeatherForecast"];
-                        "text/json": components["schemas"]["WeatherForecast"];
+                        "text/plain": components["schemas"]["AircraftSensor"];
+                        "application/json": components["schemas"]["AircraftSensor"];
+                        "text/json": components["schemas"]["AircraftSensor"];
                     };
                 };
                 /** @description Bad Request */
@@ -225,24 +225,34 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        ProblemDetails: {
-            type?: string | null;
-            title?: string | null;
+        AircraftSensor: {
             /** Format: int32 */
-            status?: number | null;
-            detail?: string | null;
-            instance?: string | null;
+            id?: number | string;
+            aircraftName: string;
+            nation: string;
+            /** Format: double */
+            battleRating?: number | string;
+            radarPresent?: boolean;
+            radarType?: null | string;
+            radarModes?: null | string[];
+            lockState?: null | string;
+            lookDownCapable?: boolean;
+            notchSusceptible?: boolean;
+            rwrPresent?: boolean;
+            rwrAlertTypes?: null | string[];
+            guidanceType?: null | string;
+            countermeasures?: null | string[];
+            classification?: null | string;
+            strengths?: null | string[];
+            limitations?: null | string[];
         };
-        WeatherForecast: {
+        ProblemDetails: {
+            type?: null | string;
+            title?: null | string;
             /** Format: int32 */
-            id?: number;
-            /** Format: date */
-            date?: string;
-            /** Format: int32 */
-            temperatureC?: number;
-            /** Format: int32 */
-            temperatureF?: number;
-            summary?: string | null;
+            status?: null | number | string;
+            detail?: null | string;
+            instance?: null | string;
         };
     };
     responses: never;
