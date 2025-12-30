@@ -11,12 +11,6 @@ services:
       - ASPNETCORE_URLS=http://+:8080
     networks:
       - app-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/WeatherForecast"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
   client:
     build:
