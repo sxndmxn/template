@@ -97,6 +97,12 @@ This template demonstrates:
    - Atomic operations with `Interlocked`
    - CRUD implementation patterns
 
+5. **Unit Testing**
+   - xUnit testing framework
+   - Comprehensive controller testing with all CRUD operations
+   - Model testing with edge cases and Theory/InlineData patterns
+   - Arrange-Act-Assert pattern for test organization
+
 ### Frontend Patterns
 
 1. **Type Safety**
@@ -157,6 +163,11 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:5294
 - **`Controllers/WeatherForecastController.cs`** - Complete CRUD controller example
 - **`WeatherForecast.cs`** - Data model with computed properties
 
+### Server Tests
+
+- **`Server.Tests/WeatherForecastTests.cs`** - Unit tests for WeatherForecast model
+- **`Server.Tests/WeatherForecastControllerTests.cs`** - Comprehensive unit tests for API controller
+
 ### Client
 
 - **`lib/api/apiClient.ts`** - API client configuration and middleware
@@ -172,7 +183,7 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:5294
 # Build the project
 dotnet build
 
-# Run tests (when added)
+# Run tests
 dotnet test
 
 # Watch for changes and hot reload
