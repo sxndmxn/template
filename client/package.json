@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "bun test",
     "test:ts": "tsc --noEmit",
     "generate:api": "openapi-typescript http://localhost:5294/openapi/v1.json -o lib/api/v1.ts"
   },
