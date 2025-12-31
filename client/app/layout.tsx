@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar";
+import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
 	title: "War Thunder - Aircraft Sensor Database",
@@ -15,14 +11,10 @@ export default function RootLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className="dark">
 			<body className="font-sans antialiased">
-				<SidebarProvider>
-					<AppSidebar />
-					<SidebarInset>
-						{children}
-					</SidebarInset>
-				</SidebarProvider>
+				<SiteHeader />
+				{children}
 			</body>
 		</html>
 	);
