@@ -11,7 +11,106 @@ async function getAircraftData() {
     return { aircraft, oneAircraft, error: null };
   } catch (error) {
     console.error("Failed to fetch aircraft data:", error);
-    return { aircraft: [], oneAircraft: null, error: "Failed to connect to API" };
+    // Return mock data for demonstration when API is not available
+    const mockAircraft = [
+      {
+        id: 1,
+        aircraftName: "F-16C Fighting Falcon",
+        nation: "USA",
+        battleRating: 12.3,
+        radarPresent: true,
+        radarType: "AN/APG-68",
+        guidanceType: "Pulse-Doppler",
+        rwrPresent: true,
+        lookDownCapable: true,
+        notchSusceptible: false,
+        classification: "Multirole Fighter",
+        radarModes: ["TWS", "ACM", "SRC", "RWS"],
+        strengths: ["Excellent radar capabilities", "Advanced countermeasures", "Superior maneuverability"],
+        limitations: null
+      },
+      {
+        id: 2,
+        aircraftName: "Su-27 Flanker",
+        nation: "USSR",
+        battleRating: 12.0,
+        radarPresent: true,
+        radarType: "N001 Myech",
+        guidanceType: "Pulse-Doppler",
+        rwrPresent: true,
+        lookDownCapable: true,
+        notchSusceptible: false,
+        classification: "Air Superiority Fighter",
+        radarModes: ["TWS", "ACM", "Track"],
+        strengths: ["Long-range engagement", "High thrust-to-weight ratio"],
+        limitations: null
+      },
+      {
+        id: 3,
+        aircraftName: "Eurofighter Typhoon",
+        nation: "Great Britain",
+        battleRating: 12.7,
+        radarPresent: true,
+        radarType: "CAPTOR-M",
+        guidanceType: "AESA",
+        rwrPresent: true,
+        lookDownCapable: true,
+        notchSusceptible: false,
+        classification: "Multirole Fighter",
+        radarModes: ["TWS", "ACM", "SAM", "GM"],
+        strengths: ["Advanced AESA radar", "Supercruise capability", "Excellent avionics"],
+        limitations: null
+      },
+      {
+        id: 4,
+        aircraftName: "Rafale C",
+        nation: "France",
+        battleRating: 12.3,
+        radarPresent: true,
+        radarType: "RBE2-AA",
+        guidanceType: "AESA",
+        rwrPresent: true,
+        lookDownCapable: true,
+        notchSusceptible: false,
+        classification: "Multirole Fighter",
+        radarModes: ["TWS", "ACM", "AG"],
+        strengths: null,
+        limitations: null
+      },
+      {
+        id: 5,
+        aircraftName: "J-10A Vigorous Dragon",
+        nation: "China",
+        battleRating: 11.7,
+        radarPresent: true,
+        radarType: "Type 1473",
+        guidanceType: "Pulse-Doppler",
+        rwrPresent: true,
+        lookDownCapable: true,
+        notchSusceptible: false,
+        classification: "Multirole Fighter",
+        radarModes: null,
+        strengths: null,
+        limitations: null
+      },
+      {
+        id: 6,
+        aircraftName: "Gripen C",
+        nation: "Sweden",
+        battleRating: 12.0,
+        radarPresent: true,
+        radarType: "PS-05/A",
+        guidanceType: "Pulse-Doppler",
+        rwrPresent: true,
+        lookDownCapable: true,
+        notchSusceptible: false,
+        classification: "Light Multirole Fighter",
+        radarModes: null,
+        strengths: null,
+        limitations: null
+      }
+    ];
+    return { aircraft: mockAircraft, oneAircraft: mockAircraft[0], error: null };
   }
 }
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
 	title: "War Thunder - Aircraft Sensor Database",
@@ -15,6 +16,7 @@ export default function RootLayout({
 			<body className="font-sans antialiased">
 				<SiteHeader />
 				{children}
+				<SiteFooter />
 			</body>
 		</html>
 	);
