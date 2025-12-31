@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
+import { AppSidebar } from "@/components/app-sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar";
 
 export const metadata: Metadata = {
 	title: "War Thunder - Aircraft Sensor Database",
@@ -14,9 +17,12 @@ export default function RootLayout({
 	return (
 		<html lang="en" className="dark">
 			<body className="font-sans antialiased">
-				<SiteHeader />
-				{children}
-				<SiteFooter />
+				<SidebarProvider>
+					<AppSidebar />
+					<SidebarInset>
+						{children}
+					</SidebarInset>
+				</SidebarProvider>
 			</body>
 		</html>
 	);
