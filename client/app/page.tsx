@@ -291,7 +291,7 @@ export default async function Home() {
   const { aircraft, oneAircraft, error } = await getAircraftData();
 
   return (
-    <main className="flex min-h-screen flex-col p-6 sm:p-8 bg-background">
+    <main className="flex flex-col p-6 sm:p-8 bg-background">
       <div className="mb-6">
         <div className="mb-3 inline-flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-3 py-1">
           <Radar className="h-4 w-4 text-primary" />
