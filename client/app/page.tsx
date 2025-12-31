@@ -1,6 +1,6 @@
 import { getAircraftSensors, getAircraftSensorById } from "@/services/aircraftSensorService";
 import type { components } from "@/lib/api/v1";
-import { Plane, Radar, Shield, Zap, Database, TrendingUp } from "lucide-react";
+import { Plane, Radar, Database, TrendingUp } from "lucide-react";
 
 type AircraftSensor = components["schemas"]["AircraftSensor"];
 
@@ -285,13 +285,6 @@ function AircraftContent({ aircraft, oneAircraft }: { aircraft: AircraftSensor[]
       </div>
     </div>
   );
-}
-
-function renderContent(error: string | null, aircraft: AircraftSensor[], oneAircraft: AircraftSensor | null) {
-  if (error) {
-    return <ApiError />;
-  }
-  return <AircraftContent aircraft={aircraft} oneAircraft={oneAircraft} />;
 }
 
 export default async function Home() {
