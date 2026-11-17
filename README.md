@@ -1,6 +1,8 @@
 # Full-Stack Template: .NET API + Next.js Client
 
-A production-ready template for building modern web applications with a .NET Core API backend and Next.js 16 frontend. This repository demonstrates best practices and common patterns, making it both a starting point for new projects and a learning resource for understanding full-stack development.
+This template connects an ASP.NET Core 10 API to a Next.js 16 client.
+The example application manages aircraft sensor records.
+The client uses generated OpenAPI types with `openapi-fetch`.
 
 ## 🏗️ Architecture Overview
 
@@ -36,10 +38,10 @@ cd server
 dotnet restore
 
 # Run the API with hot reload
-dotnet watch run
+dotnet watch run --project Server.Api/Server.csproj
 ```
 
-The API will start at `https://localhost:7294` (or `http://localhost:5294`). OpenAPI documentation is available at `/openapi/v1.json` in development mode.
+The API will start at `http://localhost:5294` with the default HTTP profile. OpenAPI documentation is available at `/openapi/v1.json` in development mode.
 
 ### Running the Client
 
@@ -61,7 +63,7 @@ The client will start at `http://localhost:3000`.
 **API:**
 ```bash
 cd server
-dotnet publish -c Release -o ./publish
+dotnet publish Server.Api/Server.csproj -c Release -o ./publish
 ```
 
 **Client:**
@@ -78,7 +80,7 @@ This template demonstrates:
 ### Backend Patterns
 
 1. **RESTful API Design**
-   - Resource-based routing (`/WeatherForecast`, `/WeatherForecast/{id}`)
+   - Resource-based routing (`/AircraftSensor`, `/AircraftSensor/{id}`)
    - HTTP verbs mapping (GET, POST, PUT, DELETE)
    - Proper status codes (200, 201, 204, 400, 404, 409, 500)
 
@@ -160,24 +162,26 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:5294
 ### Server
 
 - **`Program.cs`** - Application entry point, service configuration, middleware pipeline
-- **`Controllers/WeatherForecastController.cs`** - Complete CRUD controller example
-- **`WeatherForecast.cs`** - Data model with computed properties
+- **`Controllers/AircraftSensorController.cs`** - Complete CRUD controller example
+- **`AircraftSensor.cs`** - Aircraft sensor data model
 
 ### Server Tests
 
-- **`server/Server.Tests/WeatherForecastTests.cs`** - Unit tests for WeatherForecast model
-- **`server/Server.Tests/WeatherForecastControllerTests.cs`** - Comprehensive unit tests for API controller
+- **`server/Server.Tests/AircraftSensorTests.cs`** - Unit tests for AircraftSensor model
+- **`server/Server.Tests/AircraftSensorControllerTests.cs`** - Comprehensive unit tests for API controller
 
 ### Client
 
 - **`lib/api/apiClient.ts`** - API client configuration and middleware
 - **`lib/api/v1.ts`** - Auto-generated TypeScript types from OpenAPI
-- **`services/weatherForecastService.ts`** - Service layer for API calls
+- **`services/aircraftSensorService.ts`** - Service layer for API calls
 - **`app/page.tsx`** - Example of Server Component data fetching
 
 ## 🛠️ Development Commands
 
 ### Server
+
+Run these commands from `server/`.
 
 ```bash
 # Build the project
@@ -187,13 +191,15 @@ dotnet build
 dotnet test
 
 # Watch for changes and hot reload
-dotnet watch run
+dotnet watch run --project Server.Api/Server.csproj
 
 # Create a release build
-dotnet publish -c Release
+dotnet publish Server.Api/Server.csproj -c Release
 ```
 
 ### Client
+
+Run these commands from `client/`.
 
 ```bash
 # Development server
@@ -220,16 +226,17 @@ When you update the API, regenerate TypeScript types:
 2. In the client directory, run:
 
 ```bash
-npx openapi-typescript http://localhost:5294/openapi/v1.json -o lib/api/v1.ts
+bunx openapi-typescript http://localhost:5294/openapi/v1.json -o lib/api/v1.ts
 ```
 
-Consider adding this as a script in `package.json` for convenience.
+The existing `generate:api` script requires `openapi-typescript` on `PATH`.
+The command above obtains the generator through Bun.
 
 ## 🎨 Customizing for Your Project
 
 To adapt this template for your needs:
 
-1. **Replace the Weather Example**
+1. **Replace the Aircraft Sensor Example**
    - Create new models in `server/Server.Api/`
    - Add new controllers in `server/Server.Api/Controllers/`
    - Update services in `client/services/`
@@ -259,7 +266,7 @@ To adapt this template for your needs:
 
 ### Backend
 - ASP.NET Core 10.0
-- OpenAPI/Swagger (Scalar)
+- OpenAPI document generation
 - Problem Details (RFC 7807)
 
 ### Frontend
